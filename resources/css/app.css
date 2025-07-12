@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@layer base {
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        @apply bg-[#0a192f] text-slate-400 antialiased;
+        cursor: none;
+    }
+
+    ::selection {
+        @apply bg-blue-400/30 text-blue-400;
+    }
+}
+
+@layer components {
+    .custom-cursor {
+        @apply fixed w-8 h-8 rounded-full pointer-events-none mix-blend-difference z-50;
+        border: 2px solid rgb(100, 255, 218);
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s, border-radius 0.2s;
+    }
+
+    .cursor-hover {
+        @apply w-24 h-24;
+        border-radius: 20%;
+        background-color: rgb(100, 255, 218, 0.1);
+    }
+
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effects */
+a, button {
+    @apply relative transition-all duration-300;
+}
+
+a::before, button::before {
+    content: '';
+    @apply absolute -inset-2 rounded opacity-0 transition-all duration-300;
+}
+
+a:hover::before, button:hover::before {
+    @apply opacity-100 bg-blue-400/10;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-[#0a192f];
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-blue-400/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-blue-400/40;
+}
